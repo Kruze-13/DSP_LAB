@@ -1,0 +1,39 @@
+        %%FFT IN DIT
+        % Radix 2 Decimation in Time
+        % Input : Normal Order (Input Bits reversed)
+        % Output: Normal Order
+clc;
+close all;
+clear all;
+x=input('Enter the input Sequence; x(n) = ');
+n=length(x);
+bi=ceil(log2(n));
+N=2^bi;
+x=[x,zeros(1,N-n)];
+half=1;
+        % Seting the initial "Half" value
+x=bitrevorder(x);
+        % Placing the data samples in bit-reversed order
+for stage=1:bi
+for index=0:(2^stage):(N-1)
+        % series of "butterflies" for each stage
+for n=0:(half-1)
+pos=n+index+1;
+        % index of the data sample
+pow=(2^(bi-stage))*n;
+        % power of the complex multiplier
+w=exp((-1i)*(2*pi)*pow/N);
+        % complex multiplier
+a=x(pos)+x(pos+half).*w;
+        % 1-st part of the "butterfly" creating operation
+b=x(pos)-x(pos+half).*w;
+        % 2-nd part of the "butterfly" creating operation
+x(pos)=a;
+x(pos+half)=b;
+end
+end
+x
+half=2*half;
+        % computing the next "Half" value
+end
+y=x
