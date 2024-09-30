@@ -1,0 +1,38 @@
+        %%FFT IN DIF
+        % Radix 2 Decimation in Frequency
+        % Input : Normal Order
+        % Output: Normal Order (Output Bits reversed)
+clc;
+close all;
+clear all;
+x=input('Enter the input Sequence; x(n) = ');
+n=length(x);
+bi=ceil(log2(n));
+N=2^bi;
+x=[x,zeros(1,N-n)];
+half=N/2;
+% half the length of the array
+for stage=1:bi
+for index=0:(N/(2^(stage-1))):(N-1)
+% series of "butterflies" for each stage
+for n=0:(half-1)
+pos=n+index+1;
+% index of the data sample
+pow=(2^(stage-1))*n;
+% power of the complex multiplier
+w=exp((-1i)*(2*pi)*pow/N);
+% complex multiplier
+a=x(pos)+x(pos+half);
+% 1-st part of the "butterfly" creating opera
+b=(x(pos)-x(pos+half)).*w;
+% 2-nd part of the "butterfly" creating opera
+x(pos)=a;
+x(pos+half)=b;
+end
+end
+x
+half=half/2;
+        % computing the next "Half" value
+end
+y=bitrevorder(x)
+        % performing bit-reverse operation
