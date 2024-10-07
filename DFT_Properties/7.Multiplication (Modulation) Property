@@ -22,9 +22,20 @@ disp(Y');
 disp('DFT of multiplication of x1 and x2 by property : ');
 disp(y');
 if abs(y-Y)<10^(-10)
-disp('Multiplication property of DFT is verified');
+    disp('Multiplication property of DFT is verified');
 else
-disp('Multiplication property of DFT is not verified');
+    disp('Multiplication property of DFT is not verified');
+end
+
+
+function y=dft(x)
+N=length(x);
+y=zeros(1,N);
+for k=1:N
+    for n=1:N
+        y(k)=y(k)+exp(-1i*2*pi*(k-1)*(n-1)/N)*x(n);
+    end
+end
 end
 
 
