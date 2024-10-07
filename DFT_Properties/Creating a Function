@@ -6,6 +6,7 @@ for k=1:N
         y(k)=y(k)+exp(-1i*2*pi*(k-1)*(n-1)/N)*x(n);
     end
 end
+end
 
 
 the above give is the matlab code on how to create a function
