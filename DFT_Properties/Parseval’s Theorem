@@ -14,9 +14,9 @@ disp(X);
 disp('1/N * Sum of |DFT(x)|^2 : ');
 disp(Y);
 if X==Y
-disp('Parsevals Theorem of DFT is verified');
+    disp('Parsevals Theorem of DFT is verified');
 else
-disp('Parsevals Theorem of DFT is not verified');
+    disp('Parsevals Theorem of DFT is not verified');
 end
 
 
